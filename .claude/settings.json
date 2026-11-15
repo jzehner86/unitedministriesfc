@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "ClaudeInChromeDomain(unitedministriesfc-united-ministries-of.editor.wix.com)"
+    ]
+  }
+}
