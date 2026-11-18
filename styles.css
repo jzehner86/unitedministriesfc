@@ -94,8 +94,9 @@ nav a.btn:hover { text-decoration: none; }
 .about-grid { display: grid; gap: 2rem; }
 .about-grid img { width: 100%; height: auto; border-radius: 12px; }
 
-.photos { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
-.photos figure { margin: 0; }
+/* Columns let the wide and tall photos pack together without big gaps */
+.photos { column-gap: 1.5rem; margin-top: 2.5rem; }
+.photos figure { margin: 0 0 1.5rem; break-inside: avoid; }
 .photos img { width: 100%; height: auto; display: block; border-radius: 12px; }
 .photos figcaption { margin-top: .6rem; font-size: .95rem; }
 .credit { display: block; font-family: var(--sans); font-size: .8rem; color: #555; margin-top: .15rem; }
@@ -148,7 +149,7 @@ address { font-style: normal; }
 @media (min-width: 760px) {
   .about-grid { grid-template-columns: 1fr 1fr; align-items: start; }
   .cards { grid-template-columns: repeat(3, 1fr); }
-  .photos { grid-template-columns: 1fr 1fr; align-items: start; }
+  .photos { column-count: 2; }
   .income-grid { grid-template-columns: 1fr 1fr; align-items: start; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
