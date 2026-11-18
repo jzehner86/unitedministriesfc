@@ -99,6 +99,18 @@ tfoot td { font-family: var(--serif); font-style: italic; border-bottom: 0; padd
 .donate-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
 .donate-inner > div { max-width: 40rem; }
 .donate p { margin: 0; }
+.amount-buttons { display: flex; flex-wrap: wrap; gap: .75rem; }
+.amount-buttons[hidden] { display: none; }
+.freq { display: inline-flex; margin-bottom: 1rem; border-radius: 999px; box-shadow: inset 0 0 0 2px var(--green); overflow: hidden; }
+.freq button {
+  font: 600 .95rem var(--sans); color: var(--green); background: transparent;
+  border: 0; padding: .5rem 1.25rem; cursor: pointer;
+}
+.freq button[aria-selected="true"] { background: var(--green); color: #fff; }
+.freq button:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.btn-outline { background: transparent; color: var(--green); box-shadow: inset 0 0 0 2px var(--green); }
+.btn-outline:hover, .btn-outline:focus-visible { background: var(--green); color: #fff; }
+.tax-note { margin-top: 1rem !important; font-size: .9rem; color: #444; max-width: 24rem; }
 
 /* Footer */
 .site-footer { padding: 2.5rem 0 1.5rem; font-size: .95rem; }
@@ -107,20 +119,6 @@ tfoot td { font-family: var(--serif); font-style: italic; border-bottom: 0; padd
 .site-footer h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: .04em; }
 address { font-style: normal; }
 .copyright { margin-top: 2rem; color: #666; font-size: .85rem; }
-
-/* Toast */
-.toast {
-  position: fixed; left: 50%; bottom: 1.5rem; z-index: 20;
-  transform: translate(-50%, 1rem);
-  max-width: calc(100% - 2.5rem);
-  background: var(--green-dark); color: #fff;
-  font-family: var(--sans); font-size: 1rem;
-  padding: .85rem 1.5rem; border-radius: 999px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
-  opacity: 0; pointer-events: none;
-  transition: opacity .2s, transform .2s;
-}
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 @media (min-width: 760px) {
   .about-grid { grid-template-columns: 1fr 1fr; align-items: start; }

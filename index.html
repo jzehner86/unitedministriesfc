@@ -36,7 +36,7 @@
         <a href="#about">About</a>
         <a href="#programs">Programs</a>
         <a href="#contact">Contact</a>
-        <a class="btn btn-small" href="#donate" data-donate>Donate</a>
+        <a class="btn btn-small" href="#donate">Donate</a>
       </nav>
     </div>
   </header>
@@ -47,7 +47,7 @@
       <div class="wrap hero-inner">
         <h1>Reaching Our Community</h1>
         <p>United Ministries of Fulton County is dedicated to serving individuals in need through a threefold program approach. Those three programs are: the food pantry, the outreach program for assistance with utilities or rent, and the Christmas Basket program to provide a well filled basket with holiday foods and other items.</p>
-        <a class="btn" href="#donate" data-donate>Donate Now</a>
+        <a class="btn" href="#donate">Donate Now</a>
       </div>
     </section>
 
@@ -136,8 +136,24 @@
           <h2>Help Us Serve More</h2>
           <p>Your support directly funds our community outreach programs and essential services. Every contribution helps us provide food, shelter, and vital resources to those in need across Fulton County.</p>
         </div>
-        <!-- TODO: point this at the donation tool (hosted donation page, or embed the form here) -->
-        <a class="btn" href="#" data-donate>Donate Now</a>
+        <div class="amounts">
+          <div class="freq" role="tablist" aria-label="Gift frequency">
+            <button type="button" role="tab" id="tab-once" aria-controls="panel-once" aria-selected="true">One time</button>
+            <button type="button" role="tab" id="tab-monthly" aria-controls="panel-monthly" aria-selected="false" tabindex="-1">Monthly</button>
+          </div>
+          <div class="amount-buttons" id="panel-once" role="tabpanel" aria-labelledby="tab-once">
+            <a class="btn" href="https://buy.stripe.com/00w5kw09U8tG6IK76T0Fi00" target="_blank" rel="noopener">$25</a>
+            <a class="btn" href="https://buy.stripe.com/4gM3co9KuaBO5EG9f10Fi01" target="_blank" rel="noopener">$50</a>
+            <a class="btn" href="https://buy.stripe.com/bJebIUe0K8tG5EGcrd0Fi02" target="_blank" rel="noopener">$100</a>
+            <a class="btn btn-outline" href="https://donate.stripe.com/cNi4gscWG5hu9UW76T0Fi03" target="_blank" rel="noopener">Other amount</a>
+          </div>
+          <div class="amount-buttons" id="panel-monthly" role="tabpanel" aria-labelledby="tab-monthly" hidden>
+            <a class="btn" href="https://buy.stripe.com/aFaeV67CmfW8ffggHt0Fi04" target="_blank" rel="noopener">$10 / month</a>
+            <a class="btn" href="https://buy.stripe.com/cNi14ge0KcJW4AC62P0Fi05" target="_blank" rel="noopener">$25 / month</a>
+            <a class="btn" href="https://buy.stripe.com/9B64gs1dYh0c9UWfDp0Fi06" target="_blank" rel="noopener">$50 / month</a>
+          </div>
+          <p class="tax-note">United Ministries of Fulton County is a 501(c)(3) nonprofit organization. EIN: 35-1304700. Your gift may be tax-deductible.</p>
+        </div>
       </div>
     </section>
 
@@ -164,21 +180,27 @@
     <p class="copyright wrap">&copy; 2026 United Ministries of Fulton County. All rights reserved.</p>
   </footer>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
   <script>
-    // Temporary: Donate buttons show a "coming soon" toast until a donation tool is set up.
-    // To go live, remove the data-donate attributes, point each button's href at the donation page, and delete this script.
+    // One time / Monthly toggle for the donate buttons
     (function () {
-      var toast = document.getElementById('toast');
-      var timer;
-      document.querySelectorAll('[data-donate]').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-          e.preventDefault();
-          toast.textContent = 'Online donations are coming soon!';
-          toast.classList.add('show');
-          clearTimeout(timer);
-          timer = setTimeout(function () { toast.classList.remove('show'); }, 3500);
+      var tabs = [
+        { tab: document.getElementById('tab-once'), panel: document.getElementById('panel-once') },
+        { tab: document.getElementById('tab-monthly'), panel: document.getElementById('panel-monthly') }
+      ];
+      function select(i) {
+        tabs.forEach(function (t, j) {
+          var on = i === j;
+          t.tab.setAttribute('aria-selected', on);
+          t.tab.tabIndex = on ? 0 : -1;
+          t.panel.hidden = !on;
+        });
+      }
+      tabs.forEach(function (t, i) {
+        t.tab.addEventListener('click', function () { select(i); });
+        t.tab.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+            var n = 1 - i; select(n); tabs[n].tab.focus();
+          }
         });
       });
     })();
